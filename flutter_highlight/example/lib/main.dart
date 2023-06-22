@@ -56,11 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList();
             },
             onSelected: (selected) {
-              if (selected != null) {
-                setState(() {
-                  language = selected;
-                });
-              }
+              setState(() {
+                language = selected;
+              });
             },
           ),
           PopupMenuButton<String>(
@@ -75,36 +73,37 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList();
             },
             onSelected: (selected) {
-              if (selected != null) {
-                setState(() {
-                  theme = selected;
-                });
-              }
+              setState(() {
+                theme = selected;
+              });
             },
           ),
           IconButton(
             icon: const Icon(Icons.code),
             tooltip: 'Source Code',
             onPressed: () {
-              launch('https://github.com/pd4d10/highlight');
+              // Go to https://github.com/pd4d10/highlight
+              launchUrl(Uri.https('github.com', '/pd4d10/highlight'));
             },
           )
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            HighlightView(
-              exampleMap[language],
-              language: language,
-              theme: themeMap[theme],
-              padding: EdgeInsets.all(12),
-              textStyle: TextStyle(
-                  fontFamily:
-                      'SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace'),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              HighlightView(
+                exampleMap[language]!,
+                language: language,
+                theme: themeMap[theme]!,
+                padding: EdgeInsets.all(12),
+                textStyle: TextStyle(
+                    fontFamily:
+                        'SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace'),
+              )
+            ],
+          ),
         ),
       ),
     );
